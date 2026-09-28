@@ -38,7 +38,7 @@ function AppContent() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#0B1020] text-slate-100 flex flex-col font-sans selection:bg-[#B7FF5A] selection:text-[#0B1020]">
+    <div className="min-h-screen bg-[#080D1A] text-slate-100 flex flex-col font-sans selection:bg-[#B7FF5A] selection:text-[#080D1A] antialiased">
       {/* 3-Zone Header Navbar */}
       <Navbar
         currentTab={currentTab}
@@ -63,7 +63,7 @@ function AppContent() {
         )}
 
         {/* Main Content Area */}
-        <main className={`flex-1 pb-20 lg:pb-8 overflow-x-hidden ${currentTab !== 'landing' ? 'w-full' : ''}`}>
+        <main className={`flex-1 pb-24 lg:pb-12 overflow-x-hidden ${currentTab !== 'landing' ? 'w-full' : ''}`}>
           {currentTab === 'landing' && (
             <LandingPage
               onInitialize={() => setIsSetupOpen(true)}
@@ -96,11 +96,11 @@ function AppContent() {
       </div>
 
       {/* Mobile Bottom Navigation Bar (Touch-friendly 6-item control) */}
-      <nav className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-[#0B1020]/95 backdrop-blur-md border-t border-slate-800 px-2 py-2 flex items-center justify-around text-[10px] font-mono">
+      <nav className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-[#0D1527]/95 backdrop-blur-xl border-t border-white/[0.08] px-3 py-2 flex items-center justify-around text-[10px] font-mono shadow-[0_-10px_30px_rgba(0,0,0,0.6)]">
         <button
           onClick={() => setCurrentTab('command')}
-          className={`flex flex-col items-center gap-1 p-1 rounded ${
-            currentTab === 'command' ? 'text-[#50E3FF]' : 'text-slate-400'
+          className={`flex flex-col items-center gap-1 p-1 rounded-xl transition-colors ${
+            currentTab === 'command' ? 'text-[#FAF8F2] font-bold' : 'text-slate-400'
           }`}
         >
           <LayoutDashboard className="w-4 h-4" />
@@ -109,8 +109,8 @@ function AppContent() {
 
         <button
           onClick={() => setCurrentTab('analytics')}
-          className={`flex flex-col items-center gap-1 p-1 rounded ${
-            currentTab === 'analytics' ? 'text-[#B7FF5A]' : 'text-slate-400'
+          className={`flex flex-col items-center gap-1 p-1 rounded-xl transition-colors ${
+            currentTab === 'analytics' ? 'text-[#B7FF5A] font-bold' : 'text-slate-400'
           }`}
         >
           <BarChart3 className="w-4 h-4" />
@@ -119,21 +119,21 @@ function AppContent() {
 
         <button
           onClick={() => setCurrentTab('leave')}
-          className={`flex flex-col items-center gap-1 p-1 rounded relative ${
-            currentTab === 'leave' ? 'text-[#FFB84D]' : 'text-slate-400'
+          className={`flex flex-col items-center gap-1 p-1 rounded-xl relative transition-colors ${
+            currentTab === 'leave' ? 'text-[#E5C07B] font-bold' : 'text-slate-400'
           }`}
         >
           <Zap className="w-4 h-4" />
           <span>Leave</span>
           {isSimulationActive && (
-            <span className="absolute top-0 right-1 w-1.5 h-1.5 rounded-full bg-[#FFB84D]" />
+            <span className="absolute top-0 right-1 w-1.5 h-1.5 rounded-full bg-[#E5C07B]" />
           )}
         </button>
 
         <button
           onClick={() => setCurrentTab('timemachine')}
-          className={`flex flex-col items-center gap-1 p-1 rounded ${
-            currentTab === 'timemachine' ? 'text-[#50E3FF]' : 'text-slate-400'
+          className={`flex flex-col items-center gap-1 p-1 rounded-xl transition-colors ${
+            currentTab === 'timemachine' ? 'text-[#50E3FF] font-bold' : 'text-slate-400'
           }`}
         >
           <Sparkles className="w-4 h-4" />
@@ -142,8 +142,8 @@ function AppContent() {
 
         <button
           onClick={() => setCurrentTab('timetable')}
-          className={`flex flex-col items-center gap-1 p-1 rounded ${
-            currentTab === 'timetable' ? 'text-[#B7FF5A]' : 'text-slate-400'
+          className={`flex flex-col items-center gap-1 p-1 rounded-xl transition-colors ${
+            currentTab === 'timetable' ? 'text-[#B7FF5A] font-bold' : 'text-slate-400'
           }`}
         >
           <Calendar className="w-4 h-4" />
@@ -152,8 +152,8 @@ function AppContent() {
 
         <button
           onClick={() => setCurrentTab('landing')}
-          className={`flex flex-col items-center gap-1 p-1 rounded ${
-            currentTab === 'landing' ? 'text-white' : 'text-slate-400'
+          className={`flex flex-col items-center gap-1 p-1 rounded-xl transition-colors ${
+            currentTab === 'landing' ? 'text-white font-bold' : 'text-slate-400'
           }`}
         >
           <Compass className="w-4 h-4" />

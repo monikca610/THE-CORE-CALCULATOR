@@ -1,19 +1,25 @@
 @import "tailwindcss";
 
 @theme {
-  --font-display: 'Syne', sans-serif;
-  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  --color-nexus-dark: #0B1020;
-  --color-nexus-indigo: #151B32;
-  --color-nexus-surface: #1B223F;
-  --color-nexus-border: rgba(80, 227, 255, 0.15);
+  --color-nexus-dark: #080D1A;
+  --color-nexus-navy: #0D1527;
+  --color-nexus-surface: #131D35;
+  --color-nexus-surface-hover: #1A2645;
+  --color-nexus-border: rgba(255, 255, 255, 0.08);
+  --color-nexus-border-light: rgba(255, 255, 255, 0.14);
+  --color-nexus-ivory: #FAF8F2;
+  --color-nexus-ivory-warm: #F4F0E4;
+  --color-nexus-ivory-muted: #E8E4D5;
   --color-nexus-lime: #B7FF5A;
+  --color-nexus-gold: #E5C07B;
+  --color-nexus-gold-muted: #C8A858;
   --color-nexus-cyan: #50E3FF;
   --color-nexus-amber: #FFB84D;
   --color-nexus-coral: #FF5263;
-  --color-nexus-ivory: #F4F0E4;
 }
 
 /* Custom scrollbars */
@@ -22,37 +28,77 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0B1020;
+  background: #080D1A;
 }
 ::-webkit-scrollbar-thumb {
-  background: #252D4D;
-  border-radius: 3px;
+  background: #1E2B4A;
+  border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #50E3FF;
+  background: #E5C07B;
 }
 
-/* Subtle futuristic tech grid background */
-.bg-grid-cyber {
+/* Subtle modern architectural mesh & grid */
+.bg-grid-modern {
   background-image: 
-    linear-gradient(to right, rgba(80, 227, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(80, 227, 255, 0.04) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
-.bg-radial-glow {
-  background: radial-gradient(circle at 50% 20%, rgba(80, 227, 255, 0.09) 0%, rgba(183, 255, 90, 0.04) 35%, transparent 70%);
+.bg-radial-luxury {
+  background: radial-gradient(circle at 50% 10%, rgba(229, 192, 123, 0.07) 0%, rgba(183, 255, 90, 0.03) 25%, transparent 60%);
+}
+
+/* Luxury card glassmorphism */
+.glass-panel {
+  background: rgba(13, 21, 39, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+}
+
+.glass-panel-hover {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glass-panel-hover:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 16px 36px -6px rgba(0, 0, 0, 0.6), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.glass-panel-subtle {
+  background: rgba(19, 29, 53, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-panel-ivory {
+  background: #FAF8F2;
+  color: #080D1A;
+  box-shadow: 0 14px 34px -5px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(229, 192, 123, 0.3);
 }
 
 .glow-lime {
-  box-shadow: 0 0 25px -4px rgba(183, 255, 90, 0.35);
+  box-shadow: 0 0 30px -5px rgba(183, 255, 90, 0.25);
+}
+
+.glow-gold {
+  box-shadow: 0 0 30px -5px rgba(229, 192, 123, 0.25);
 }
 
 .glow-cyan {
-  box-shadow: 0 0 25px -4px rgba(80, 227, 255, 0.35);
+  box-shadow: 0 0 30px -5px rgba(80, 227, 255, 0.25);
 }
 
 .glow-coral {
-  box-shadow: 0 0 30px -4px rgba(255, 82, 99, 0.45);
+  box-shadow: 0 0 35px -5px rgba(255, 82, 99, 0.35);
 }
 
+/* Tabular figures for exact alignment */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}

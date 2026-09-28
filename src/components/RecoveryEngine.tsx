@@ -100,7 +100,7 @@ export const RecoveryEngine: React.FC = () => {
 
   // Exact math step strings for explanation box
   const formulaStep1 = `Current Attendance = (Attended / Conducted) × 100 = (${attended} / ${conducted}) × 100 = ${currentPct.toFixed(2)}%`;
-  const formulaStep2 = `Target Threshold T = ${target}% = ${T}`;
+  const formulaStep2 = `Target Benchmark T = ${target}% = ${T}`;
   const formulaNumerator = `${T} × ${conducted} - ${attended} = ${(T * conducted).toFixed(4)} - ${attended} = ${(T * conducted - attended).toFixed(4)}`;
   const formulaDenominator = `1 - ${T} = ${(1 - T).toFixed(2)}`;
   const formulaDivision = ((T * conducted - attended) / (1 - T)).toFixed(4);
@@ -108,33 +108,33 @@ export const RecoveryEngine: React.FC = () => {
   const formulaStep4 = `Maximum Achievable Attendance = (${attended} + ${remaining}) / (${conducted} + ${remaining}) × 100 = ${(attended + remaining)} / ${(conducted + remaining)} × 100 = ${maxAchievable.toFixed(2)}%`;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-9">
       
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-800 pb-6">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/[0.08] pb-6">
         <div>
-          <div className="flex items-center gap-2 text-xs font-mono text-[#50E3FF] uppercase tracking-widest mb-1">
+          <div className="flex items-center gap-2 text-xs font-mono text-[#E5C07B] uppercase tracking-widest mb-1.5 font-medium">
             <Zap className="w-4 h-4 text-[#B7FF5A]" />
             <span>ALGORITHMIC RECOVERY MODULE</span>
           </div>
-          <h1 className="font-display font-extrabold text-3xl sm:text-4xl text-white tracking-tight">
+          <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-[#FAF8F2] tracking-tight">
             THE RECOVERY ENGINE
           </h1>
-          <p className="text-slate-400 text-sm mt-1">
-            Deterministic mathematical recovery trajectories for {currentSection.name}. Calculate your exact minimum attendance mission.
+          <p className="text-slate-400 font-sans text-sm mt-1 max-w-2xl">
+            Deterministic recovery trajectories for {currentSection.name}. Calculate your exact minimum attendance mission.
           </p>
         </div>
 
         {/* Target Percentage Segmented Control */}
-        <div className="flex items-center gap-1.5 bg-[#151B32] p-1.5 rounded-xl border border-slate-800">
-          <span className="text-xs font-mono text-slate-400 px-2">TARGET:</span>
+        <div className="flex items-center gap-1.5 bg-[#0D1527] p-1.5 rounded-2xl border border-white/[0.08] shadow-sm">
+          <span className="text-xs font-mono text-slate-400 px-2.5">TARGET:</span>
           {targets.map((t) => (
             <button
               key={t}
               onClick={() => setTargetPercentage(t)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all ${
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-mono font-bold transition-all ${
                 state.targetPercentage === t
-                  ? 'bg-[#B7FF5A] text-[#0B1020] shadow-[0_0_15px_rgba(183,255,90,0.3)]'
+                  ? 'bg-[#FAF8F2] text-[#080D1A] shadow-sm'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
@@ -145,13 +145,13 @@ export const RecoveryEngine: React.FC = () => {
       </div>
 
       {/* Subject Filter Bar */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2 border-b border-slate-800/80">
+      <div className="flex items-center gap-2.5 overflow-x-auto pb-2 border-b border-white/[0.08]">
         <button
           onClick={() => setSelectedSubjectCode('overall')}
-          className={`px-3.5 py-1.5 rounded-lg text-xs font-mono whitespace-nowrap transition-all ${
+          className={`px-4 py-2 rounded-xl text-xs font-mono whitespace-nowrap transition-all ${
             selectedSubjectCode === 'overall'
-              ? 'bg-white text-[#0B1020] font-bold shadow-sm'
-              : 'bg-[#151B32] text-slate-400 hover:text-white border border-slate-800'
+              ? 'bg-[#FAF8F2] text-[#080D1A] font-bold shadow-sm'
+              : 'bg-[#0D1527] text-slate-400 hover:text-white border border-white/[0.08]'
           }`}
         >
           Overall Semester
@@ -161,10 +161,10 @@ export const RecoveryEngine: React.FC = () => {
           <button
             key={sub.subjectCode}
             onClick={() => setSelectedSubjectCode(sub.subjectCode)}
-            className={`px-3.5 py-1.5 rounded-lg text-xs font-mono whitespace-nowrap transition-all flex items-center gap-1.5 ${
+            className={`px-4 py-2 rounded-xl text-xs font-mono whitespace-nowrap transition-all flex items-center gap-2 ${
               selectedSubjectCode === sub.subjectCode
-                ? 'bg-[#50E3FF] text-[#0B1020] font-bold shadow-sm'
-                : 'bg-[#151B32] text-slate-400 hover:text-white border border-slate-800'
+                ? 'bg-[#50E3FF] text-[#080D1A] font-bold shadow-sm'
+                : 'bg-[#0D1527] text-slate-400 hover:text-white border border-white/[0.08]'
             }`}
           >
             <span>{sub.slot}: {sub.subjectCode}</span>
@@ -176,20 +176,20 @@ export const RecoveryEngine: React.FC = () => {
       </div>
 
       {/* Main Mission Display Board */}
-      <div className="relative rounded-2xl bg-[#151B32] border border-[#50E3FF]/30 p-6 sm:p-8 shadow-2xl overflow-hidden">
+      <div className="relative rounded-3xl bg-[#0D1527]/85 backdrop-blur-2xl border border-white/[0.08] p-6 sm:p-8 lg:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] overflow-hidden">
         
         {/* Ambient Top Glow */}
-        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-48 bg-gradient-to-b from-[#50E3FF]/20 to-transparent blur-2xl pointer-events-none" />
+        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-48 bg-gradient-to-b from-[#E5C07B]/15 to-transparent blur-3xl pointer-events-none" />
 
         <div className="relative space-y-8">
           
           {/* Mission Top Header */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <span className="text-[11px] font-mono text-[#50E3FF] uppercase tracking-widest block">
+              <span className="text-[11px] font-mono text-[#E5C07B] uppercase tracking-widest block font-semibold">
                 {isOverall ? 'AGGREGATE SEMESTER TARGET' : `${selectedSubject?.subjectName} (${selectedSubject?.subjectCode})`}
               </span>
-              <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-white mt-1">
+              <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-[#FAF8F2] mt-0.5">
                 RECOVERY MISSION SPECIFICATION
               </h2>
             </div>
@@ -212,45 +212,45 @@ export const RecoveryEngine: React.FC = () => {
           {/* Large Animated Telemetry Counters */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             
-            <div className="p-5 rounded-xl bg-[#0B1020] border border-slate-800">
-              <span className="text-[11px] font-mono text-slate-400 block">CURRENT STATUS</span>
-              <div className="font-display font-extrabold text-4xl text-white tabular-nums tracking-tight mt-1">
+            <div className="p-5 rounded-2xl bg-[#080D1A]/90 border border-white/[0.06] shadow-sm">
+              <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider block">CURRENT STANDING</span>
+              <div className="font-display font-extrabold text-4xl text-[#FAF8F2] tabular-nums tracking-tight mt-1">
                 {currentPct.toFixed(1)}%
               </div>
-              <span className="text-xs font-mono text-slate-400 block mt-1">
+              <span className="text-xs font-mono text-slate-400 block mt-1 font-sans">
                 {attended} of {conducted} attended
               </span>
             </div>
 
-            <div className="p-5 rounded-xl bg-[#0B1020] border border-slate-800">
-              <span className="text-[11px] font-mono text-slate-400 block">TARGET THRESHOLD</span>
-              <div className="font-display font-extrabold text-4xl text-[#50E3FF] tabular-nums tracking-tight mt-1">
+            <div className="p-5 rounded-2xl bg-[#080D1A]/90 border border-white/[0.06] shadow-sm">
+              <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider block">TARGET THRESHOLD</span>
+              <div className="font-display font-extrabold text-4xl text-[#E5C07B] tabular-nums tracking-tight mt-1">
                 {target}%
               </div>
-              <span className="text-xs font-mono text-slate-400 block mt-1">
-                SRM official benchmark
+              <span className="text-xs font-mono text-slate-400 block mt-1 font-sans">
+                institutional cutoff benchmark
               </span>
             </div>
 
-            <div className="p-5 rounded-xl bg-[#0B1020] border border-slate-800">
-              <span className="text-[11px] font-mono text-slate-400 block">CLASSES TO ATTEND</span>
+            <div className="p-5 rounded-2xl bg-[#080D1A]/90 border border-white/[0.06] shadow-sm">
+              <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider block">CLASSES TO ATTEND</span>
               <div
                 className="font-display font-extrabold text-4xl tabular-nums tracking-tight mt-1"
                 style={{ color: !isPossible ? '#FF5263' : reqClasses > 0 ? '#FFB84D' : '#B7FF5A' }}
               >
                 {!isPossible ? '∞' : reqClasses}
               </div>
-              <span className="text-xs font-mono text-slate-400 block mt-1">
+              <span className="text-xs font-mono text-slate-400 block mt-1 font-sans">
                 {reqClasses > 0 ? 'Consecutive future classes' : 'Target already satisfied'}
               </span>
             </div>
 
-            <div className="p-5 rounded-xl bg-[#0B1020] border border-slate-800">
-              <span className="text-[11px] font-mono text-slate-400 block">MAX ACHIEVABLE</span>
-              <div className="font-display font-extrabold text-4xl text-white tabular-nums tracking-tight mt-1">
+            <div className="p-5 rounded-2xl bg-[#080D1A]/90 border border-white/[0.06] shadow-sm">
+              <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider block">MAX ACHIEVABLE</span>
+              <div className="font-display font-extrabold text-4xl text-[#B7FF5A] tabular-nums tracking-tight mt-1">
                 {maxAchievable.toFixed(1)}%
               </div>
-              <span className="text-xs font-mono text-slate-400 block mt-1">
+              <span className="text-xs font-mono text-slate-400 block mt-1 font-sans">
                 with {remaining} classes remaining
               </span>
             </div>
@@ -258,29 +258,29 @@ export const RecoveryEngine: React.FC = () => {
           </div>
 
           {/* Classes You Can Safely Miss Calculation Card */}
-          <div className="p-5 rounded-xl bg-[#0B1020]/90 border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="p-6 rounded-3xl bg-[#080D1A]/95 border border-white/[0.08] flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm">
             <div className="space-y-1">
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-[#50E3FF]" />
-                <h4 className="font-display font-bold text-base text-white">
+              <div className="flex items-center gap-2.5">
+                <ShieldCheck className="w-5 h-5 text-[#B7FF5A]" />
+                <h4 className="font-display font-bold text-lg text-[#FAF8F2]">
                   Safe Bunk Margin Analytics
                 </h4>
               </div>
-              <p className="text-xs text-slate-400 max-w-xl">
+              <p className="text-xs text-slate-400 max-w-xl font-sans leading-relaxed">
                 Calculated based on current standing, target percentage ({target}%), and total remaining scheduled classes ({remaining}).
               </p>
             </div>
 
-            <div className="flex items-center gap-6 font-mono shrink-0">
+            <div className="flex items-center gap-8 font-mono shrink-0">
               <div className="text-right">
-                <span className="text-[10px] text-slate-400 block">REMAINING SEMESTER SAFE MISSES</span>
-                <span className="text-2xl font-bold text-[#50E3FF] tabular-nums">
+                <span className="text-[10px] text-slate-400 uppercase tracking-wider block">SAFE MISSES BUDGET</span>
+                <span className="text-3xl font-bold text-[#50E3FF] tabular-nums">
                   {safeMisses} <span className="text-xs text-slate-400 font-normal">classes</span>
                 </span>
               </div>
-              <div className="text-right border-l border-slate-800 pl-6">
-                <span className="text-[10px] text-slate-400 block">INSTANT SKIP MARGIN</span>
-                <span className="text-2xl font-bold text-[#B7FF5A] tabular-nums">
+              <div className="text-right border-l border-white/[0.08] pl-8">
+                <span className="text-[10px] text-slate-400 uppercase tracking-wider block">INSTANT SKIP MARGIN</span>
+                <span className="text-3xl font-bold text-[#B7FF5A] tabular-nums">
                   {isOverall ? overallCalculation.instantSkipMargin : selectedSubject?.instantSkipMargin ?? 0}{' '}
                   <span className="text-xs text-slate-400 font-normal">classes</span>
                 </span>
@@ -289,20 +289,20 @@ export const RecoveryEngine: React.FC = () => {
           </div>
 
           {/* Visual Recovery Progress Track */}
-          <div className="space-y-3">
+          <div className="space-y-3.5">
             <div className="flex items-center justify-between text-xs font-mono">
-              <span className="text-white font-semibold">ATTENDANCE TRAJECTORY SIMULATION TRACK</span>
+              <span className="text-[#FAF8F2] font-semibold">ATTENDANCE TRAJECTORY SIMULATION TRACK</span>
               <span className="text-slate-400 text-[11px]">
                 Progression assuming 100% attendance in future classes
               </span>
             </div>
 
-            <div className="p-4 bg-[#0B1020] rounded-xl border border-slate-800 overflow-x-auto">
+            <div className="p-5 bg-[#080D1A]/90 rounded-2xl border border-white/[0.06] overflow-x-auto">
               <div className="min-w-[640px] flex items-center gap-3 py-2">
                 
                 {/* Starting Node */}
-                <div className="px-3.5 py-2.5 rounded-xl bg-[#151B32] border border-slate-700 text-center shrink-0">
-                  <span className="text-[10px] font-mono text-slate-400 block">INITIAL</span>
+                <div className="px-4 py-3 rounded-2xl bg-[#0D1527] border border-white/[0.1] text-center shrink-0 shadow-sm">
+                  <span className="text-[10px] font-mono text-slate-400 uppercase block">INITIAL</span>
                   <span className="font-display font-bold text-base text-white block mt-0.5">
                     {currentPct.toFixed(1)}%
                   </span>
@@ -315,10 +315,10 @@ export const RecoveryEngine: React.FC = () => {
                   <React.Fragment key={st.step}>
                     <ArrowRight className="w-4 h-4 text-slate-600 shrink-0" />
                     <div
-                      className={`px-3.5 py-2.5 rounded-xl text-center shrink-0 border transition-all ${
+                      className={`px-4 py-3 rounded-2xl text-center shrink-0 border transition-all ${
                         st.isTargetMet
-                          ? 'bg-[#B7FF5A]/15 border-[#B7FF5A] text-[#B7FF5A] shadow-[0_0_15px_rgba(183,255,90,0.15)]'
-                          : 'bg-[#151B32] border-slate-800 text-slate-300'
+                          ? 'bg-[#B7FF5A]/15 border-[#B7FF5A] text-[#B7FF5A] shadow-[0_0_15px_rgba(183,255,90,0.2)]'
+                          : 'bg-[#0D1527] border-white/[0.08] text-slate-300'
                       }`}
                     >
                       <span className="text-[10px] font-mono block font-semibold opacity-90">
@@ -339,52 +339,52 @@ export const RecoveryEngine: React.FC = () => {
           </div>
 
           {/* Expandable "How was this calculated?" Panel */}
-          <div className="border border-slate-800 rounded-xl bg-[#0B1020]/60 overflow-hidden">
+          <div className="border border-white/[0.08] rounded-2xl bg-[#080D1A]/60 overflow-hidden">
             <button
               onClick={() => setShowExplanation((prev) => !prev)}
-              className="w-full px-5 py-3.5 flex items-center justify-between text-xs font-mono text-slate-300 hover:text-white hover:bg-slate-800/40 transition-colors"
+              className="w-full px-6 py-4 flex items-center justify-between text-xs font-mono text-slate-300 hover:text-white hover:bg-white/[0.02] transition-colors"
             >
-              <div className="flex items-center gap-2">
-                <HelpCircle className="w-4 h-4 text-[#50E3FF]" />
-                <span className="font-bold">HOW WAS THIS CALCULATED? (FORMULA PROOF)</span>
+              <div className="flex items-center gap-2.5">
+                <HelpCircle className="w-4 h-4 text-[#E5C07B]" />
+                <span className="font-bold tracking-wide">HOW WAS THIS CALCULATED? (FORMULA PROOF)</span>
               </div>
               {showExplanation ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
             </button>
 
             {showExplanation && (
-              <div className="p-5 border-t border-slate-800 space-y-4 text-xs font-mono text-slate-300 bg-[#0B1020]">
+              <div className="p-6 border-t border-white/[0.08] space-y-4 text-xs font-mono text-slate-300 bg-[#080D1A]">
                 <div className="space-y-1">
                   <span className="text-[#50E3FF] font-bold">1. Current Attendance Ratio:</span>
-                  <div className="p-2.5 rounded bg-[#151B32] text-slate-200">
+                  <div className="p-3 rounded-xl bg-[#0D1527] text-slate-200 border border-white/[0.06]">
                     <code>{formulaStep1}</code>
                   </div>
                 </div>
 
                 <div className="space-y-1">
                   <span className="text-[#B7FF5A] font-bold">2. Minimum Classes Required to Reach Target T:</span>
-                  <p className="text-[11px] text-slate-400">
+                  <p className="text-[11px] text-slate-400 font-sans">
                     Derived from equation: <code>(attended + x) / (conducted + x) ≥ T</code> ⇒ <code>x ≥ (T·conducted - attended) / (1 - T)</code>
                   </p>
-                  <div className="p-2.5 rounded bg-[#151B32] text-slate-200">
-                    <code>{formulaStep2}</code> <br />
-                    <code>{formulaStep3}</code>
+                  <div className="p-3 rounded-xl bg-[#0D1527] text-slate-200 border border-white/[0.06] space-y-1">
+                    <div><code>{formulaStep2}</code></div>
+                    <div><code>{formulaStep3}</code></div>
                   </div>
                 </div>
 
                 <div className="space-y-1">
-                  <span className="text-[#FFB84D] font-bold">3. Maximum Achievable Attendance:</span>
-                  <p className="text-[11px] text-slate-400">
+                  <span className="text-[#E5C07B] font-bold">3. Maximum Achievable Attendance:</span>
+                  <p className="text-[11px] text-slate-400 font-sans">
                     Assuming student attends all {remaining} remaining scheduled timetable periods.
                   </p>
-                  <div className="p-2.5 rounded bg-[#151B32] text-slate-200">
+                  <div className="p-3 rounded-xl bg-[#0D1527] text-slate-200 border border-white/[0.06]">
                     <code>{formulaStep4}</code>
                   </div>
                 </div>
 
                 <div className="space-y-1">
-                  <span className="text-[#50E3FF] font-bold">4. Safe Miss Budget:</span>
-                  <p className="text-[11px] text-slate-400">
-                    Total allowable absences across semester: <code>⌊(conducted + remaining) × (1 - T)⌋</code> minus already missed absences.
+                  <span className="text-[#FAF8F2] font-bold">4. Safe Miss Budget:</span>
+                  <p className="text-[11px] text-slate-400 font-sans">
+                    Total allowable absences across semester: <code>⌊(conducted + remaining) × (1 - T)⌋</code> minus already recorded absences.
                   </p>
                 </div>
               </div>

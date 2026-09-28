@@ -61,7 +61,6 @@ export const TimeMachinePlanner: React.FC = () => {
   }, [futureOccurrences, activeDate]);
 
   // Calculations for selected date:
-  // Baseline initial counts
   const baseAttended = overallCalculation.totalAttended;
   const baseConducted = overallCalculation.totalConducted;
 
@@ -96,30 +95,30 @@ export const TimeMachinePlanner: React.FC = () => {
   });
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-9">
       
       {/* Top Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-800 pb-6">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/[0.08] pb-6">
         <div>
-          <div className="flex items-center gap-2 text-xs font-mono text-[#B7FF5A] uppercase tracking-widest mb-1">
-            <Sparkles className="w-4 h-4" />
+          <div className="flex items-center gap-2 text-xs font-mono text-[#E5C07B] uppercase tracking-widest mb-1.5 font-medium">
+            <Sparkles className="w-4 h-4 text-[#B7FF5A]" />
             <span>FUTURISTIC CHRONO-PLANNER</span>
           </div>
-          <h1 className="font-display font-extrabold text-3xl sm:text-4xl text-white tracking-tight">
+          <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-[#FAF8F2] tracking-tight">
             THE TIME MACHINE
           </h1>
-          <p className="text-slate-400 text-sm mt-1">
-            Travel through your semester before it happens. Simulate skip decisions, test attendance boundaries, and preview final outcomes.
+          <p className="text-slate-400 font-sans text-sm mt-1 max-w-2xl">
+            Simulate your semester before it happens. Test skip decisions, verify attendance trajectories, and secure your final grade.
           </p>
         </div>
 
         {/* 3 Main Scenario Controls */}
-        <div className="flex items-center gap-1.5 p-1.5 rounded-xl bg-[#151B32] border border-slate-800 text-xs font-mono">
+        <div className="flex items-center gap-1.5 p-1 bg-[#0D1527] border border-white/[0.08] rounded-2xl text-xs font-mono shadow-sm">
           <button
             onClick={() => setTimeMachineScenario('perfect')}
-            className={`px-3 py-1.5 rounded-lg transition-all ${
+            className={`px-4 py-2 rounded-xl transition-all ${
               state.timeMachineScenario === 'perfect'
-                ? 'bg-[#B7FF5A] text-[#0B1020] font-bold shadow-sm'
+                ? 'bg-[#B7FF5A] text-[#080D1A] font-bold shadow-[0_0_15px_rgba(183,255,90,0.3)]'
                 : 'text-slate-400 hover:text-white'
             }`}
           >
@@ -127,9 +126,9 @@ export const TimeMachinePlanner: React.FC = () => {
           </button>
           <button
             onClick={() => setTimeMachineScenario('miss_all')}
-            className={`px-3 py-1.5 rounded-lg transition-all ${
+            className={`px-4 py-2 rounded-xl transition-all ${
               state.timeMachineScenario === 'miss_all'
-                ? 'bg-[#FF5263] text-white font-bold shadow-sm'
+                ? 'bg-[#FF5263] text-white font-bold shadow-[0_0_15px_rgba(255,82,99,0.3)]'
                 : 'text-slate-400 hover:text-white'
             }`}
           >
@@ -137,9 +136,9 @@ export const TimeMachinePlanner: React.FC = () => {
           </button>
           <button
             onClick={() => setTimeMachineScenario('custom')}
-            className={`px-3 py-1.5 rounded-lg transition-all ${
+            className={`px-4 py-2 rounded-xl transition-all ${
               state.timeMachineScenario === 'custom'
-                ? 'bg-[#50E3FF] text-[#0B1020] font-bold shadow-sm'
+                ? 'bg-[#FAF8F2] text-[#080D1A] font-bold shadow-sm'
                 : 'text-slate-400 hover:text-white'
             }`}
           >
@@ -149,21 +148,21 @@ export const TimeMachinePlanner: React.FC = () => {
       </div>
 
       {/* Horizontal Interactive Timeline Strip */}
-      <div className="rounded-2xl bg-[#151B32] border border-[#50E3FF]/30 p-6 space-y-4 shadow-xl">
+      <div className="rounded-3xl bg-[#0D1527]/85 backdrop-blur-2xl border border-white/[0.08] p-6 sm:p-8 space-y-5 shadow-[0_20px_50px_rgba(0,0,0,0.6)]">
         <div className="flex items-center justify-between text-xs font-mono">
-          <div className="flex items-center gap-2 text-white font-semibold">
-            <Clock className="w-4 h-4 text-[#50E3FF]" />
+          <div className="flex items-center gap-2 text-[#FAF8F2] font-semibold">
+            <Clock className="w-4 h-4 text-[#E5C07B]" />
             <span>SEMESTER TIME TRAVEL SCRUBBER</span>
           </div>
           <span className="text-[#50E3FF]">
-            Selected Destination: <strong>{activeDate}</strong> ({countScheduledUpToDate} future classes to date)
+            Selected Destination: <strong className="text-white">{activeDate}</strong> ({countScheduledUpToDate} future classes to date)
           </span>
         </div>
 
         {/* Scrollable Date Nodes */}
         <div className="overflow-x-auto pb-2">
-          <div className="flex items-center gap-2 min-w-max py-2">
-            {uniqueFutureDates.map((d, idx) => {
+          <div className="flex items-center gap-2.5 min-w-max py-2">
+            {uniqueFutureDates.map((d) => {
               const isSelected = d === activeDate;
               const dateObj = new Date(d + 'T00:00:00');
               const dayStr = dateObj.toLocaleDateString('en-US', { weekday: 'short' });
@@ -173,13 +172,13 @@ export const TimeMachinePlanner: React.FC = () => {
                 <button
                   key={d}
                   onClick={() => setSelectedDate(d)}
-                  className={`px-3 py-2.5 rounded-xl border text-center font-mono transition-all flex flex-col items-center ${
+                  className={`px-3.5 py-2.5 rounded-2xl border text-center font-mono transition-all flex flex-col items-center ${
                     isSelected
-                      ? 'bg-[#50E3FF] text-[#0B1020] border-[#50E3FF] font-bold shadow-[0_0_15px_rgba(80,227,255,0.4)] scale-105'
-                      : 'bg-[#0B1020] text-slate-300 border-slate-800 hover:border-slate-700'
+                      ? 'bg-[#FAF8F2] text-[#080D1A] border-[#FAF8F2] font-bold shadow-[0_0_20px_rgba(250,248,242,0.3)] scale-105'
+                      : 'bg-[#080D1A] text-slate-300 border-white/[0.06] hover:border-white/[0.18]'
                   }`}
                 >
-                  <span className="text-[10px] uppercase opacity-80">{dayStr}</span>
+                  <span className="text-[10px] uppercase opacity-75">{dayStr}</span>
                   <span className="text-xs font-bold whitespace-nowrap mt-0.5">{monthDay}</span>
                 </button>
               );
@@ -188,49 +187,49 @@ export const TimeMachinePlanner: React.FC = () => {
         </div>
 
         {/* Timeline Projections Matrix for Selected Date */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-3">
           
-          <div className="p-4 rounded-xl bg-[#0B1020] border border-slate-800">
-            <span className="text-[10px] font-mono text-slate-400 block">SCHEDULED TO DATE</span>
-            <div className="font-display font-extrabold text-3xl text-white tabular-nums mt-1">
+          <div className="p-5 rounded-2xl bg-[#080D1A]/90 border border-white/[0.06] shadow-sm">
+            <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">CLASSES TO DATE</span>
+            <div className="font-display font-extrabold text-3xl sm:text-4xl text-[#FAF8F2] tabular-nums mt-1">
               +{countScheduledUpToDate}
             </div>
-            <span className="text-xs font-mono text-slate-400 block mt-0.5">
-              classes between now and {activeDate}
+            <span className="text-xs font-mono text-slate-400 block mt-1 font-sans">
+              sessions between today & {activeDate}
             </span>
           </div>
 
-          <div className="p-4 rounded-xl bg-[#0B1020] border border-slate-800">
-            <span className="text-[10px] font-mono text-slate-400 block">IF 100% ATTENDED</span>
-            <div className="font-display font-extrabold text-3xl text-[#B7FF5A] tabular-nums mt-1">
+          <div className="p-5 rounded-2xl bg-[#080D1A]/90 border border-white/[0.06] shadow-sm">
+            <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">IF 100% ATTENDED</span>
+            <div className="font-display font-extrabold text-3xl sm:text-4xl text-[#B7FF5A] tabular-nums mt-1">
               {pctIfPerfect.toFixed(1)}%
             </div>
-            <span className="text-xs font-mono text-slate-400 block mt-0.5">
-              +{ (pctIfPerfect - overallCalculation.currentPercentage).toFixed(1) }% gain
+            <span className="text-xs font-mono text-slate-400 block mt-1 font-sans">
+              +{ (pctIfPerfect - overallCalculation.currentPercentage).toFixed(1) }% projected gain
             </span>
           </div>
 
-          <div className="p-4 rounded-xl bg-[#0B1020] border border-slate-800">
-            <span className="text-[10px] font-mono text-slate-400 block">IF MISSED ALL TO DATE</span>
-            <div className="font-display font-extrabold text-3xl text-[#FF5263] tabular-nums mt-1">
+          <div className="p-5 rounded-2xl bg-[#080D1A]/90 border border-white/[0.06] shadow-sm">
+            <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">IF MISSED ALL TO DATE</span>
+            <div className="font-display font-extrabold text-3xl sm:text-4xl text-[#FF5263] tabular-nums mt-1">
               {pctIfMissed.toFixed(1)}%
             </div>
-            <span className="text-xs font-mono text-slate-400 block mt-0.5">
-              -{ (overallCalculation.currentPercentage - pctIfMissed).toFixed(1) }% loss
+            <span className="text-xs font-mono text-slate-400 block mt-1 font-sans">
+              -{ (overallCalculation.currentPercentage - pctIfMissed).toFixed(1) }% projected loss
             </span>
           </div>
 
-          <div className="p-4 rounded-xl bg-[#0B1020] border border-slate-800">
-            <span className="text-[10px] font-mono text-slate-400 block">MY ACTIVE PLAN RESULT</span>
+          <div className="p-5 rounded-2xl bg-[#080D1A]/90 border border-white/[0.06] shadow-sm">
+            <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">ACTIVE PLAN RESULT</span>
             <div
-              className="font-display font-extrabold text-3xl tabular-nums mt-1"
+              className="font-display font-extrabold text-3xl sm:text-4xl tabular-nums mt-1"
               style={{
                 color: projectedFinalPct >= state.targetPercentage ? '#B7FF5A' : '#FFB84D',
               }}
             >
               {projectedFinalPct.toFixed(1)}%
             </div>
-            <span className="text-xs font-mono text-slate-400 block mt-0.5">
+            <span className="text-xs font-mono text-slate-400 block mt-1 font-sans">
               Target: {state.targetPercentage}%
             </span>
           </div>
@@ -239,27 +238,27 @@ export const TimeMachinePlanner: React.FC = () => {
       </div>
 
       {/* Interactive Class Scheduler per Date (BUILD MY OWN PLAN) */}
-      <div className="space-y-4">
+      <div className="space-y-5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h2 className="font-display font-bold text-xl text-white">
+            <h2 className="font-display font-bold text-2xl text-[#FAF8F2] tracking-tight">
               SESSION DISPATCH: {activeDate}
             </h2>
-            <p className="text-xs text-slate-400 mt-0.5">
-              Toggle Attend or Absent for each class session to compute exact custom attendance predictions.
+            <p className="text-xs text-slate-400 font-sans mt-0.5">
+              Toggle Attend or Absent for each class session to compute exact custom attendance predictions in real time.
             </p>
           </div>
 
           <div className="flex items-center gap-2">
             <button
               onClick={() => bulkSetFuturePlan('attend')}
-              className="px-3 py-1.5 rounded-lg bg-[#0B1020] border border-[#B7FF5A]/40 text-[#B7FF5A] text-xs font-mono hover:bg-[#151B32]"
+              className="px-4 py-2 rounded-xl bg-[#0D1527] border border-[#B7FF5A]/40 text-[#B7FF5A] text-xs font-mono hover:bg-[#131D35] transition-colors"
             >
               Mark All Attend
             </button>
             <button
               onClick={() => bulkSetFuturePlan('unplanned')}
-              className="px-3 py-1.5 rounded-lg bg-[#0B1020] border border-slate-700 text-slate-300 text-xs font-mono hover:bg-[#151B32]"
+              className="px-4 py-2 rounded-xl bg-[#0D1527] border border-white/[0.1] text-slate-300 text-xs font-mono hover:bg-[#131D35] transition-colors"
             >
               Reset Plan
             </button>
@@ -268,50 +267,51 @@ export const TimeMachinePlanner: React.FC = () => {
 
         {/* Classes Table / Cards on selected date */}
         {classesOnSelectedDate.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {classesOnSelectedDate.map((occ) => {
               const sub = currentSection.subjects.find((s) => s.code === occ.subjectCode);
 
               return (
                 <div
                   key={occ.id}
-                  className="p-4 rounded-xl bg-[#151B32] border border-slate-800 flex flex-col justify-between space-y-4"
+                  className="p-5 rounded-3xl bg-[#0D1527]/85 backdrop-blur-xl border border-white/[0.08] flex flex-col justify-between space-y-5 shadow-xl hover:border-white/[0.15] transition-all"
                 >
                   <div>
                     <div className="flex items-center justify-between gap-2">
                       <div className="flex items-center gap-2">
                         <span
-                          className="px-2 py-0.5 rounded text-[10px] font-mono font-bold"
+                          className="px-2.5 py-0.5 rounded-lg text-[10px] font-mono font-bold tracking-wider"
                           style={{
-                            backgroundColor: `${sub?.color || '#50E3FF'}20`,
+                            backgroundColor: `${sub?.color || '#50E3FF'}18`,
                             color: sub?.color || '#50E3FF',
+                            border: `1px solid ${sub?.color || '#50E3FF'}35`,
                           }}
                         >
                           SLOT {sub?.slot || 'A'}
                         </span>
-                        <span className="text-xs font-mono text-slate-400">{occ.subjectCode}</span>
+                        <span className="text-xs font-mono text-slate-400 font-medium">{occ.subjectCode}</span>
                       </div>
                       <span className="text-xs font-mono text-slate-400">
                         Period {occ.period} ({occ.time})
                       </span>
                     </div>
 
-                    <h4 className="font-display font-bold text-base text-white mt-1">
+                    <h4 className="font-display font-bold text-lg text-[#FAF8F2] mt-2">
                       {sub?.name || occ.subjectCode}
                     </h4>
-                    <p className="text-xs text-slate-400 mt-0.5">
+                    <p className="text-xs text-slate-400 font-sans mt-0.5">
                       {sub?.faculty} · Venue: {occ.room || currentSection.venue}
                     </p>
                   </div>
 
                   {/* 3 Interactive Scenario Action Buttons for This Class */}
-                  <div className="flex items-center gap-1.5 pt-2 border-t border-slate-800/80 font-mono text-xs">
+                  <div className="flex items-center gap-2 pt-3 border-t border-white/[0.06] font-mono text-xs">
                     <button
                       onClick={() => setFuturePlanForClass(occ.id, 'attend')}
-                      className={`flex-1 py-1.5 rounded-lg border text-center transition-all ${
+                      className={`flex-1 py-2 rounded-xl border text-center transition-all ${
                         occ.planStatus === 'attend'
-                          ? 'bg-[#B7FF5A] text-[#0B1020] font-bold border-[#B7FF5A] shadow-[0_0_10px_rgba(183,255,90,0.3)]'
-                          : 'bg-[#0B1020] text-slate-300 border-slate-800 hover:border-slate-700'
+                          ? 'bg-[#B7FF5A] text-[#080D1A] font-bold border-[#B7FF5A] shadow-[0_0_12px_rgba(183,255,90,0.3)]'
+                          : 'bg-[#080D1A] text-slate-300 border-white/[0.06] hover:border-white/[0.2]'
                       }`}
                     >
                       ATTEND
@@ -319,10 +319,10 @@ export const TimeMachinePlanner: React.FC = () => {
 
                     <button
                       onClick={() => setFuturePlanForClass(occ.id, 'absent')}
-                      className={`flex-1 py-1.5 rounded-lg border text-center transition-all ${
+                      className={`flex-1 py-2 rounded-xl border text-center transition-all ${
                         occ.planStatus === 'absent'
-                          ? 'bg-[#FF5263] text-white font-bold border-[#FF5263] shadow-[0_0_10px_rgba(255,82,99,0.3)]'
-                          : 'bg-[#0B1020] text-slate-300 border-slate-800 hover:border-slate-700'
+                          ? 'bg-[#FF5263] text-white font-bold border-[#FF5263] shadow-[0_0_12px_rgba(255,82,99,0.3)]'
+                          : 'bg-[#080D1A] text-slate-300 border-white/[0.06] hover:border-white/[0.2]'
                       }`}
                     >
                       ABSENT
@@ -330,10 +330,10 @@ export const TimeMachinePlanner: React.FC = () => {
 
                     <button
                       onClick={() => setFuturePlanForClass(occ.id, 'unplanned')}
-                      className={`flex-1 py-1.5 rounded-lg border text-center transition-all ${
+                      className={`flex-1 py-2 rounded-xl border text-center transition-all ${
                         occ.planStatus === 'unplanned'
-                          ? 'bg-[#151B32] text-slate-400 border-slate-700'
-                          : 'bg-[#0B1020] text-slate-500 border-slate-800 hover:text-slate-300'
+                          ? 'bg-[#131D35] text-slate-400 border-white/[0.1]'
+                          : 'bg-[#080D1A] text-slate-500 border-white/[0.06] hover:text-slate-300'
                       }`}
                     >
                       UNPLANNED
@@ -344,12 +344,12 @@ export const TimeMachinePlanner: React.FC = () => {
             })}
           </div>
         ) : (
-          <div className="p-8 rounded-xl bg-[#151B32] border border-slate-800 text-center space-y-2">
-            <Calendar className="w-8 h-8 text-slate-500 mx-auto" />
-            <p className="text-sm text-slate-300 font-semibold">
+          <div className="p-12 rounded-3xl bg-[#0D1527]/60 border border-white/[0.08] text-center space-y-2">
+            <Calendar className="w-9 h-9 text-slate-500 mx-auto" />
+            <p className="text-sm text-slate-300 font-semibold font-display">
               No classes scheduled for {activeDate}
             </p>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-slate-400 font-sans max-w-sm mx-auto">
               This day may be a weekend, university holiday, or timetable recess. Select another date from the scrubber above.
             </p>
           </div>

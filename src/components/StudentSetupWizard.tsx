@@ -112,16 +112,16 @@ export const StudentSetupWizard: React.FC<StudentSetupWizardProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0B1020]/80 backdrop-blur-md">
-      <div className="bg-[#151B32] border border-[#50E3FF]/30 rounded-2xl w-full max-w-4xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#080D1A]/80 backdrop-blur-xl">
+      <div className="bg-[#0D1527]/95 border border-white/[0.12] rounded-3xl w-full max-w-4xl max-h-[90vh] flex flex-col shadow-[0_25px_60px_rgba(0,0,0,0.8)] overflow-hidden">
         
         {/* Header */}
-        <div className="px-6 py-4 border-b border-slate-800 flex items-center justify-between bg-[#0B1020]/50">
+        <div className="px-6 py-5 border-b border-white/[0.08] flex items-center justify-between bg-[#080D1A]/60">
           <div>
-            <div className="text-[11px] font-mono text-[#50E3FF] uppercase tracking-wider">
+            <div className="text-[11px] font-mono text-[#E5C07B] uppercase tracking-wider font-semibold">
               STUDENT INITIALIZATION PROTOCOL
             </div>
-            <h2 className="text-lg font-display font-bold text-white">
+            <h2 className="text-xl font-display font-bold text-[#FAF8F2] mt-0.5">
               {step === 1 && 'STEP 01 — SELECT SECTION'}
               {step === 2 && 'STEP 02 — SEMESTER DETAILS'}
               {step === 3 && 'STEP 03 — ATTENDANCE INPUT'}
@@ -130,18 +130,18 @@ export const StudentSetupWizard: React.FC<StudentSetupWizardProps> = ({
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+            className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/[0.06] transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Stepper Progress Bar */}
-        <div className="grid grid-cols-4 border-b border-slate-800 bg-[#0B1020]/20 text-xs font-mono">
+        <div className="grid grid-cols-4 border-b border-white/[0.08] bg-[#080D1A]/40 text-xs font-mono">
           {[1, 2, 3, 4].map((s) => (
             <div
               key={s}
-              className={`py-2 px-3 text-center border-r last:border-r-0 border-slate-800 transition-colors ${
+              className={`py-2.5 px-3 text-center border-r last:border-r-0 border-white/[0.06] transition-colors ${
                 step === s
                   ? 'bg-[#B7FF5A]/10 text-[#B7FF5A] font-bold border-b-2 border-b-[#B7FF5A]'
                   : step > s
@@ -155,33 +155,33 @@ export const StudentSetupWizard: React.FC<StudentSetupWizardProps> = ({
         </div>
 
         {/* Modal Body */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-6">
+        <div className="flex-1 overflow-y-auto p-6 sm:p-7 space-y-6 font-sans">
           
           {/* STEP 1: Select Section */}
           {step === 1 && (
             <div className="space-y-4">
               <p className="text-xs text-slate-300">
                 Choose your official academic class section from the SRM Institute timetable database.
-                Each section loads exact course codes, weekly credit distribution, and faculty assignments.
+                Each section loads verified course codes, weekly credit distribution, and faculty assignments.
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 {CLASS_SECTIONS.map((sec) => (
                   <button
                     key={sec.id}
                     onClick={() => handleSectionSelect(sec.id)}
-                    className={`p-4 rounded-xl text-left border transition-all ${
+                    className={`p-4 rounded-2xl text-left border transition-all ${
                       selectedSecId === sec.id
-                        ? 'bg-[#1B223F] border-[#B7FF5A] shadow-[0_0_15px_rgba(183,255,90,0.2)]'
-                        : 'bg-[#0B1020]/50 border-slate-800 hover:border-slate-700 hover:bg-[#151B32]'
+                        ? 'bg-[#131D35] border-[#E5C07B] shadow-[0_0_20px_rgba(229,192,123,0.15)]'
+                        : 'bg-[#080D1A]/60 border-white/[0.06] hover:border-white/[0.15] hover:bg-[#131D35]/50'
                     }`}
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-display font-bold text-base text-white">
+                      <span className="font-display font-bold text-base text-[#FAF8F2]">
                         {sec.name}
                       </span>
                       {selectedSecId === sec.id && (
-                        <span className="w-5 h-5 rounded-full bg-[#B7FF5A] text-[#0B1020] flex items-center justify-center text-xs font-bold">
+                        <span className="w-5 h-5 rounded-full bg-[#B7FF5A] text-[#080D1A] flex items-center justify-center text-xs font-bold">
                           ✓
                         </span>
                       )}
@@ -189,7 +189,7 @@ export const StudentSetupWizard: React.FC<StudentSetupWizardProps> = ({
                     <div className="text-xs text-[#50E3FF] mt-1 font-mono">{sec.semester}</div>
                     <div className="text-xs text-slate-400 mt-0.5">{sec.program}</div>
                     <div className="text-[11px] text-slate-400 mt-2 font-mono flex items-center gap-2">
-                      <span>Venue: {sec.venue}</span>
+                      <span>Venue: <strong className="text-slate-200">{sec.venue}</strong></span>
                       <span>·</span>
                       <span>{sec.subjects.length} Subjects</span>
                     </div>
@@ -209,14 +209,14 @@ export const StudentSetupWizard: React.FC<StudentSetupWizardProps> = ({
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-mono text-slate-400 mb-1">
+                  <label className="block text-xs font-mono text-slate-400 mb-1.5 font-medium">
                     SEMESTER START DATE
                   </label>
                   <input
                     type="date"
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
-                    className="w-full bg-[#0B1020] border border-slate-700 rounded-lg px-3 py-2 text-sm text-white font-mono focus:border-[#50E3FF] focus:outline-none"
+                    className="w-full bg-[#080D1A] border border-white/[0.1] rounded-2xl px-4 py-2.5 text-sm text-white font-mono focus:border-[#E5C07B] focus:outline-none"
                   />
                   {errors.startDate && (
                     <p className="text-xs text-[#FF5263] mt-1">{errors.startDate}</p>
@@ -224,14 +224,14 @@ export const StudentSetupWizard: React.FC<StudentSetupWizardProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono text-slate-400 mb-1">
+                  <label className="block text-xs font-mono text-slate-400 mb-1.5 font-medium">
                     SEMESTER END DATE
                   </label>
                   <input
                     type="date"
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
-                    className="w-full bg-[#0B1020] border border-slate-700 rounded-lg px-3 py-2 text-sm text-white font-mono focus:border-[#50E3FF] focus:outline-none"
+                    className="w-full bg-[#080D1A] border border-white/[0.1] rounded-2xl px-4 py-2.5 text-sm text-white font-mono focus:border-[#E5C07B] focus:outline-none"
                   />
                   {errors.endDate && (
                     <p className="text-xs text-[#FF5263] mt-1">{errors.endDate}</p>
@@ -239,14 +239,14 @@ export const StudentSetupWizard: React.FC<StudentSetupWizardProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono text-slate-400 mb-1">
+                  <label className="block text-xs font-mono text-slate-400 mb-1.5 font-medium">
                     CURRENT DATE (FOR SIMULATION)
                   </label>
                   <input
                     type="date"
                     value={currentDate}
                     onChange={(e) => setCurrentDate(e.target.value)}
-                    className="w-full bg-[#0B1020] border border-slate-700 rounded-lg px-3 py-2 text-sm text-white font-mono focus:border-[#50E3FF] focus:outline-none"
+                    className="w-full bg-[#080D1A] border border-white/[0.1] rounded-2xl px-4 py-2.5 text-sm text-white font-mono focus:border-[#E5C07B] focus:outline-none"
                   />
                   {errors.currentDate && (
                     <p className="text-xs text-[#FF5263] mt-1">{errors.currentDate}</p>
@@ -254,21 +254,21 @@ export const StudentSetupWizard: React.FC<StudentSetupWizardProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono text-slate-400 mb-1">
+                  <label className="block text-xs font-mono text-slate-400 mb-1.5 font-medium">
                     CHECKPOINT DATE (DETENTION LOCK)
                   </label>
                   <input
                     type="date"
                     value={checkpointDate}
                     onChange={(e) => setCheckpointDate(e.target.value)}
-                    className="w-full bg-[#0B1020] border border-slate-700 rounded-lg px-3 py-2 text-sm text-white font-mono focus:border-[#50E3FF] focus:outline-none"
+                    className="w-full bg-[#080D1A] border border-white/[0.1] rounded-2xl px-4 py-2.5 text-sm text-white font-mono focus:border-[#E5C07B] focus:outline-none"
                   />
                 </div>
               </div>
 
               {/* Target Attendance Selector */}
               <div>
-                <label className="block text-xs font-mono text-slate-400 mb-2">
+                <label className="block text-xs font-mono text-slate-400 mb-2 font-medium">
                   SEMESTER ATTENDANCE TARGET
                 </label>
                 <div className="grid grid-cols-4 gap-3">
@@ -277,14 +277,14 @@ export const StudentSetupWizard: React.FC<StudentSetupWizardProps> = ({
                       key={t}
                       type="button"
                       onClick={() => setTarget(t)}
-                      className={`py-3 rounded-xl border text-center font-mono font-bold transition-all ${
+                      className={`py-3.5 rounded-2xl border text-center font-mono font-bold transition-all ${
                         target === t
-                          ? 'bg-[#B7FF5A] text-[#0B1020] border-[#B7FF5A] shadow-[0_0_15px_rgba(183,255,90,0.3)]'
-                          : 'bg-[#0B1020] text-slate-300 border-slate-800 hover:border-slate-700'
+                          ? 'bg-[#FAF8F2] text-[#080D1A] border-[#FAF8F2] shadow-md'
+                          : 'bg-[#080D1A] text-slate-300 border-white/[0.08] hover:border-white/[0.2]'
                       }`}
                     >
                       <div className="text-lg">{t}%</div>
-                      <div className="text-[10px] font-normal opacity-80">
+                      <div className="text-[10px] font-normal opacity-75 font-sans mt-0.5">
                         {t === 75 ? 'SRM Minimum' : t === 90 ? 'Honors Goal' : 'Safe Buffer'}
                       </div>
                     </button>
@@ -297,20 +297,20 @@ export const StudentSetupWizard: React.FC<StudentSetupWizardProps> = ({
           {/* STEP 3: Attendance Input */}
           {step === 3 && (
             <div className="space-y-5">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[#0B1020]/60 p-3 rounded-xl border border-slate-800">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[#080D1A]/70 p-4 rounded-2xl border border-white/[0.08]">
                 <div>
-                  <div className="text-xs font-mono text-white">INPUT METHOD</div>
-                  <div className="text-[11px] text-slate-400">
+                  <div className="text-xs font-mono text-white font-bold">INPUT METHOD</div>
+                  <div className="text-[11px] text-slate-400 font-sans">
                     Exact class counts yield 100% deterministic prediction accuracy.
                   </div>
                 </div>
 
-                <div className="flex items-center gap-1 bg-[#151B32] p-1 rounded-lg border border-slate-800">
+                <div className="flex items-center gap-1 bg-[#131D35] p-1 rounded-xl border border-white/[0.08]">
                   <button
                     onClick={() => setInputMode('counts')}
-                    className={`px-3 py-1 rounded text-xs font-mono transition-colors ${
+                    className={`px-3.5 py-1.5 rounded-lg text-xs font-mono transition-colors ${
                       inputMode === 'counts'
-                        ? 'bg-[#50E3FF] text-[#0B1020] font-bold'
+                        ? 'bg-[#FAF8F2] text-[#080D1A] font-bold shadow-sm'
                         : 'text-slate-400 hover:text-white'
                     }`}
                   >
@@ -318,9 +318,9 @@ export const StudentSetupWizard: React.FC<StudentSetupWizardProps> = ({
                   </button>
                   <button
                     onClick={() => setInputMode('percentage')}
-                    className={`px-3 py-1 rounded text-xs font-mono transition-colors ${
+                    className={`px-3.5 py-1.5 rounded-lg text-xs font-mono transition-colors ${
                       inputMode === 'percentage'
-                        ? 'bg-[#50E3FF] text-[#0B1020] font-bold'
+                        ? 'bg-[#FAF8F2] text-[#080D1A] font-bold shadow-sm'
                         : 'text-slate-400 hover:text-white'
                     }`}
                   >
@@ -335,28 +335,28 @@ export const StudentSetupWizard: React.FC<StudentSetupWizardProps> = ({
                 <button
                   type="button"
                   onClick={() => applyAttendancePreset('timetable')}
-                  className="px-2.5 py-1 rounded bg-[#0B1020] border border-slate-700 text-slate-300 hover:border-[#50E3FF] font-mono text-xs"
+                  className="px-3 py-1 rounded-xl bg-[#080D1A] border border-white/[0.1] text-slate-300 hover:border-white/[0.25] font-mono text-xs"
                 >
                   Standard (82%)
                 </button>
                 <button
                   type="button"
                   onClick={() => applyAttendancePreset('borderline')}
-                  className="px-2.5 py-1 rounded bg-[#0B1020] border border-[#FFB84D]/40 text-[#FFB84D] hover:border-[#FFB84D] font-mono text-xs"
+                  className="px-3 py-1 rounded-xl bg-[#080D1A] border border-[#FFB84D]/40 text-[#FFB84D] hover:border-[#FFB84D] font-mono text-xs"
                 >
                   Borderline (73%)
                 </button>
                 <button
                   type="button"
                   onClick={() => applyAttendancePreset('critical')}
-                  className="px-2.5 py-1 rounded bg-[#0B1020] border border-[#FF5263]/40 text-[#FF5263] hover:border-[#FF5263] font-mono text-xs"
+                  className="px-3 py-1 rounded-xl bg-[#080D1A] border border-[#FF5263]/40 text-[#FF5263] hover:border-[#FF5263] font-mono text-xs"
                 >
                   Critical Recovery (58%)
                 </button>
               </div>
 
               {inputMode === 'percentage' && (
-                <div className="bg-[#50E3FF]/10 border border-[#50E3FF]/30 p-3 rounded-xl text-xs text-slate-300 flex items-start gap-2">
+                <div className="bg-[#50E3FF]/10 border border-[#50E3FF]/30 p-3.5 rounded-2xl text-xs text-slate-300 flex items-start gap-2.5">
                   <HelpCircle className="w-4 h-4 text-[#50E3FF] shrink-0 mt-0.5" />
                   <div>
                     <span className="font-semibold text-[#50E3FF]">Important Notice: </span>
@@ -380,22 +380,22 @@ export const StudentSetupWizard: React.FC<StudentSetupWizardProps> = ({
                   return (
                     <div
                       key={sub.code}
-                      className="p-3.5 rounded-xl bg-[#0B1020]/70 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                      className="p-4 rounded-2xl bg-[#080D1A]/80 border border-white/[0.06] flex flex-col sm:flex-row sm:items-center justify-between gap-4"
                     >
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">
                           <span
-                            className="px-1.5 py-0.5 rounded text-[10px] font-mono font-bold"
-                            style={{ backgroundColor: `${sub.color}25`, color: sub.color }}
+                            className="px-2 py-0.5 rounded-lg text-[10px] font-mono font-bold"
+                            style={{ backgroundColor: `${sub.color}20`, color: sub.color }}
                           >
                             SLOT {sub.slot}
                           </span>
-                          <span className="text-xs font-mono text-slate-400">{sub.code}</span>
+                          <span className="text-xs font-mono text-slate-400 font-medium">{sub.code}</span>
                         </div>
-                        <div className="font-semibold text-sm text-white truncate mt-0.5">
+                        <div className="font-display font-bold text-sm text-[#FAF8F2] truncate mt-1">
                           {sub.name}
                         </div>
-                        <div className="text-[11px] text-slate-400 truncate">
+                        <div className="text-[11px] text-slate-400 font-sans truncate mt-0.5">
                           {sub.faculty} · {sub.periodsPerWeek} hrs/week
                         </div>
                       </div>
@@ -403,7 +403,7 @@ export const StudentSetupWizard: React.FC<StudentSetupWizardProps> = ({
                       {inputMode === 'counts' ? (
                         <div className="flex items-center gap-3 shrink-0">
                           <div>
-                            <span className="block text-[10px] font-mono text-slate-400">
+                            <span className="block text-[10px] font-mono text-slate-400 uppercase">
                               ATTENDED
                             </span>
                             <input
@@ -418,12 +418,12 @@ export const StudentSetupWizard: React.FC<StudentSetupWizardProps> = ({
                                   parseInt(e.target.value) || 0
                                 )
                               }
-                              className="w-16 bg-[#151B32] border border-slate-700 rounded px-2 py-1 text-sm font-mono text-white text-center focus:border-[#50E3FF] focus:outline-none"
+                              className="w-16 bg-[#131D35] border border-white/[0.1] rounded-xl px-2 py-1 text-sm font-mono text-white text-center focus:border-[#E5C07B] focus:outline-none"
                             />
                           </div>
                           <span className="text-slate-500 font-mono text-sm pt-4">/</span>
                           <div>
-                            <span className="block text-[10px] font-mono text-slate-400">
+                            <span className="block text-[10px] font-mono text-slate-400 uppercase">
                               CONDUCTED
                             </span>
                             <input
@@ -437,7 +437,7 @@ export const StudentSetupWizard: React.FC<StudentSetupWizardProps> = ({
                                   input.attendedClasses
                                 )
                               }
-                              className="w-16 bg-[#151B32] border border-slate-700 rounded px-2 py-1 text-sm font-mono text-white text-center focus:border-[#50E3FF] focus:outline-none"
+                              className="w-16 bg-[#131D35] border border-white/[0.1] rounded-xl px-2 py-1 text-sm font-mono text-white text-center focus:border-[#E5C07B] focus:outline-none"
                             />
                           </div>
                           <div className="w-14 text-right pt-4">
@@ -460,9 +460,9 @@ export const StudentSetupWizard: React.FC<StudentSetupWizardProps> = ({
                             onChange={(e) =>
                               handlePercentageChange(sub.code, parseInt(e.target.value) || 0)
                             }
-                            className="w-full accent-[#50E3FF]"
+                            className="w-full accent-[#E5C07B]"
                           />
-                          <span className="text-sm font-bold font-mono text-[#50E3FF] w-12 text-right">
+                          <span className="text-sm font-bold font-mono text-[#E5C07B] w-12 text-right">
                             {(subjectPcts[sub.code] ?? Math.round(pct))}%
                           </span>
                         </div>
@@ -477,34 +477,34 @@ export const StudentSetupWizard: React.FC<StudentSetupWizardProps> = ({
           {/* STEP 4: Review and Initialize */}
           {step === 4 && (
             <div className="space-y-6">
-              <div className="bg-[#B7FF5A]/10 border border-[#B7FF5A]/30 p-4 rounded-xl text-center">
+              <div className="bg-[#B7FF5A]/10 border border-[#B7FF5A]/30 p-5 rounded-3xl text-center">
                 <Sparkles className="w-8 h-8 text-[#B7FF5A] mx-auto mb-2" />
-                <h3 className="text-base font-display font-bold text-white">
+                <h3 className="text-lg font-display font-bold text-[#FAF8F2]">
                   MISSION CONFIGURATION READY
                 </h3>
-                <p className="text-xs text-slate-300 mt-1 max-w-md mx-auto">
+                <p className="text-xs text-slate-300 font-sans mt-1 max-w-md mx-auto leading-relaxed">
                   Your academic profile for {currentSection.name} has been synthesized.
                   The calculation engine is ready to track recovery trajectories and simulate time-travel scenarios.
                 </p>
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono text-xs">
-                <div className="p-3 bg-[#0B1020] rounded-xl border border-slate-800">
-                  <div className="text-slate-400 text-[10px]">SECTION</div>
+                <div className="p-4 bg-[#080D1A]/90 rounded-2xl border border-white/[0.06]">
+                  <div className="text-slate-400 text-[10px] uppercase">SECTION</div>
                   <div className="text-white font-bold text-sm mt-1">{currentSection.name}</div>
                 </div>
-                <div className="p-3 bg-[#0B1020] rounded-xl border border-slate-800">
-                  <div className="text-slate-400 text-[10px]">TARGET</div>
+                <div className="p-4 bg-[#080D1A]/90 rounded-2xl border border-white/[0.06]">
+                  <div className="text-slate-400 text-[10px] uppercase">TARGET</div>
                   <div className="text-[#B7FF5A] font-bold text-sm mt-1">{target}%</div>
                 </div>
-                <div className="p-3 bg-[#0B1020] rounded-xl border border-slate-800">
-                  <div className="text-slate-400 text-[10px]">SUBJECTS</div>
+                <div className="p-4 bg-[#080D1A]/90 rounded-2xl border border-white/[0.06]">
+                  <div className="text-slate-400 text-[10px] uppercase">SUBJECTS</div>
                   <div className="text-white font-bold text-sm mt-1">
                     {currentSection.subjects.length} courses
                   </div>
                 </div>
-                <div className="p-3 bg-[#0B1020] rounded-xl border border-slate-800">
-                  <div className="text-slate-400 text-[10px]">TIMELINE</div>
+                <div className="p-4 bg-[#080D1A]/90 rounded-2xl border border-white/[0.06]">
+                  <div className="text-slate-400 text-[10px] uppercase">TIMELINE</div>
                   <div className="text-[#50E3FF] font-bold text-sm mt-1">{currentDate}</div>
                 </div>
               </div>
@@ -514,14 +514,14 @@ export const StudentSetupWizard: React.FC<StudentSetupWizardProps> = ({
         </div>
 
         {/* Footer Navigation */}
-        <div className="px-6 py-4 border-t border-slate-800 bg-[#0B1020]/50 flex items-center justify-between">
+        <div className="px-6 py-4 border-t border-white/[0.08] bg-[#080D1A]/60 flex items-center justify-between">
           <button
             onClick={handlePrevStep}
             disabled={step === 1}
-            className={`px-4 py-2 rounded-lg text-xs font-mono flex items-center gap-1.5 transition-colors ${
+            className={`px-4 py-2 rounded-xl text-xs font-mono flex items-center gap-1.5 transition-colors ${
               step === 1
                 ? 'opacity-40 cursor-not-allowed text-slate-500'
-                : 'text-slate-300 hover:text-white hover:bg-slate-800'
+                : 'text-slate-300 hover:text-white hover:bg-white/[0.06]'
             }`}
           >
             <ChevronLeft className="w-4 h-4" />
@@ -530,7 +530,7 @@ export const StudentSetupWizard: React.FC<StudentSetupWizardProps> = ({
 
           <button
             onClick={handleNextStep}
-            className="px-6 py-2.5 rounded-xl bg-[#B7FF5A] text-[#0B1020] font-display font-bold text-xs tracking-wider hover:bg-[#a6f343] transition-all flex items-center gap-2 shadow-[0_0_15px_rgba(183,255,90,0.3)]"
+            className="px-6 py-3 rounded-2xl bg-[#B7FF5A] text-[#080D1A] font-display font-bold text-xs tracking-wider hover:bg-[#a6f343] transition-all flex items-center gap-2 shadow-[0_10px_25px_rgba(183,255,90,0.25)]"
           >
             <span>{step === 4 ? 'LAUNCH DASHBOARD' : 'CONTINUE'}</span>
             <ChevronRight className="w-4 h-4 stroke-[2.5]" />
