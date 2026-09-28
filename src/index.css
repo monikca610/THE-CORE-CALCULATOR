@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: 'Syne', sans-serif;
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --color-nexus-dark: #0B1020;
+  --color-nexus-indigo: #151B32;
+  --color-nexus-surface: #1B223F;
+  --color-nexus-border: rgba(80, 227, 255, 0.15);
+  --color-nexus-lime: #B7FF5A;
+  --color-nexus-cyan: #50E3FF;
+  --color-nexus-amber: #FFB84D;
+  --color-nexus-coral: #FF5263;
+  --color-nexus-ivory: #F4F0E4;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0B1020;
+}
+::-webkit-scrollbar-thumb {
+  background: #252D4D;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #50E3FF;
+}
+
+/* Subtle futuristic tech grid background */
+.bg-grid-cyber {
+  background-image: 
+    linear-gradient(to right, rgba(80, 227, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(80, 227, 255, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.bg-radial-glow {
+  background: radial-gradient(circle at 50% 20%, rgba(80, 227, 255, 0.09) 0%, rgba(183, 255, 90, 0.04) 35%, transparent 70%);
+}
+
+.glow-lime {
+  box-shadow: 0 0 25px -4px rgba(183, 255, 90, 0.35);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 25px -4px rgba(80, 227, 255, 0.35);
+}
+
+.glow-coral {
+  box-shadow: 0 0 30px -4px rgba(255, 82, 99, 0.45);
+}
+

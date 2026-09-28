@@ -1,0 +1,6 @@
+{
+  "name": "THE CORE CALCULATOR",
+  "description": "One Semester. Every Decision Counts. Academic Nexus — Attendance Intelligence System with live timetable recovery engine, time machine future planner, detention alert analytics, On-Duty & Medical Leave simulator, and Attendance Advisor AI.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
